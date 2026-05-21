@@ -43,11 +43,21 @@ def insertion_sort(lista):
 
     return arr
 
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[0]
+        less_than_pivot = [x for x in arr[1:] if x <= pivot]
+        greater_than_pivot = [x for x in arr[1:] if x > pivot]
+        return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)
+
 tamaños = [100, 200, 400, 800, 1000]
 
 tiempos_bubble = []
 tiempos_selection = []
 tiempos_insertion = []
+tiempos_quick_sort = []
 
 for tamaño in tamaños:
 
@@ -68,9 +78,15 @@ for tamaño in tamaños:
     fin = time.time()
     tiempos_insertion.append(fin - inicio)
 
+    inicio = time.time()
+    quick_sort(lista)
+    fin = time.time()
+    tiempos_quick_sort.append(fin - inicio)
+
 plt.plot(tamaños, tiempos_bubble, marker="o", label="Bubble Sort")
 plt.plot(tamaños, tiempos_selection, marker="o", label="Selection Sort")
 plt.plot(tamaños, tiempos_insertion, marker="o", label="Insertion Sort")
+plt.plot(tamaños, tiempos_quick_sort, marker="o", label="Quick Sort")
 plt.title("Sorting Algorithms Comparison")
 plt.xlabel("Cantidad de elementos")
 plt.ylabel("Tiempo de ejecución (segundos)")

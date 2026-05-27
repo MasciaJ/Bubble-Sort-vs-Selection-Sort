@@ -44,13 +44,14 @@ def insertion_sort(lista):
     return arr
 
 def quick_sort(arr):
+
     if len(arr) <= 1:
         return arr
     else:
         pivot = arr[0]
-        less_than_pivot = [x for x in arr[1:] if x <= pivot]
-        greater_than_pivot = [x for x in arr[1:] if x > pivot]
-        return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)
+        menor_pivot = [x for x in arr[1:] if x <= pivot]
+        mayor_pivot = [x for x in arr[1:] if x > pivot]
+        return quick_sort(menor_pivot) + [pivot] + quick_sort(mayor_pivot)
 
 tamaños = [100, 200, 400, 800, 1000]
 
